@@ -68,3 +68,9 @@
 
  " Binds the F8 Key to the Next-Tab Command
  map #8 : tabn<CR>
+
+"------------------------------"
+"  HIGHLIGHT Beyond COLUMN 80  "
+"------------------------------"
+  highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
+  match OverLength /\%>80v.\+/
