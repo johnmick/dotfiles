@@ -16,6 +16,9 @@
  " Shows the line and column number of the cursor position
  set ruler            
 
+ " Vertical Splits go to the right
+ set splitright
+
 
 "-----------------------"
 " NEW LINE INDENTATION  "
@@ -57,8 +60,8 @@
  set hlsearch         
 
  " Highlights Search Sequences Incrementally as you Type
- set incsearch        
-
+ set incsearch smartcase
+ set ic smartcase
 
 "-----------------------"
 "   KEYBOARD BINDINGS   "
@@ -72,5 +75,60 @@
 "------------------------------"
 "  HIGHLIGHT Beyond COLUMN 80  "
 "------------------------------"
-  highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-  match OverLength /\%>80v.\+/
+ "highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
+ "match OverLength /\%>80v.\+/
+
+"------------------------------"
+"  Prevent Auto Comments on    "
+"    Single Line Comments      "
+"------------------------------"
+"au FileType c,cpp setlocal comments-=:// comments+=f://
+
+"------------------------------"
+"  Prevent Auto Comments on    "
+"        Any Comment           "
+"------------------------------"
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+"------------------------------"
+"    Highlight Current Line    "
+"   Number The Active Buffer   "
+"------------------------------"
+hi clear CursorLine
+augroup BgHighlight
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
+augroup END
+
+"------------------------------"
+"  Change Verticle Separator   "
+"------------------------------"
+set fillchars+=vert:\ 
+hi vertsplit ctermfg=black ctermbg=white
+
+"------------------------------"
+"  Change Status Bar           "
+"------------------------------"
+hi statusline ctermbg=yellow ctermfg=black
+hi statuslinenc ctermbg=darkgrey ctermfg=black
+
+
+"------------------------------"
+"  Change Tab Bar              "
+"------------------------------"
+hi TabLine term=bold cterm=NONE gui=NONE ctermfg=8 ctermbg=0
+hi TabLineSel term=underline cterm=bold ctermfg=yellow ctermbg=0
+hi TabLineFill term=bold cterm=bold ctermbg=0
+
+
+"------------------------------"
+"    Syntax Highlighting       "
+"  By Special File Extensions  "
+"------------------------------"
+"au BufRead,BufNewFile *.C set filetype=cpp
+"au BufRead,BufNewFile *.sel set filetype=tcl
+"au BufRead,BufNewFile *.mac set filetype=tcl
+"au BufRead,BufNewFile *.inc set filetype=tcl
+"au BufRead,BufNewFile *.Mod set filetype=zsh
+
